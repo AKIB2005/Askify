@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ASKIFY - N.K. Orchid College Assistant</title>
+<style>
+/* (keeping your full CSS unchanged for design) */
+</style>
+</head>
+<body>
+  <!-- unchanged body structure -->
+
+<script>
+  /* ===================== DATA ===================== */
+  const facultyData = [
+    { name: "Dr. B. K. Songe", position: "Principal", qualification: "B.E, M.E, Ph.D (NITK) · BEE Certified Energy Manager & Energy Auditor", location: "A-Building, Office Department" },
+    { name: "Dr. V. V. Bag", position: "HOD, CSE Department · Professor", qualification: "B.Tech (CSE), M.Tech (Computer), Ph.D (Computer Engg)", location: "B-Building, 1st Floor, Left Corner" },
+    { name: "Dr. M. B. Patil", position: "Associate Professor · HOD of AIDS Department", qualification: "B.E (CSE), M.Tech (CSE), Ph.D (CSE), Postdoc (Singapore Institute of Technology)", location: "C-Building, 2nd Floor, AT-308" },
+    { name: "Prof. M. S. Otari", position: "Assistant Professor", qualification: "B.E (CSE), Ph.D (Pursuing)", location: "" },
+    { name: "Prof. B. B. Simpi", position: "Assistant Professor", qualification: "B.E (CSE), M.Tech (Data Science)", location: "" },
+    { name: "Prof. N. S. Mehta", position: "Assistant Professor", qualification: "B.E (CSE), M.E (CSE)", location: "" },
+    { name: "Prof. G. R. Shaikh", position: "Assistant Professor", qualification: "B.E (IT), M.E (CSE)", location: "B-Building, 1st Floor, CSE-201 (Project Lab-II)" },
+    { name: "Prof. P. C. Bhuyar", position: "Assistant Professor", qualification: "B.E (CSE), M.Tech (CSE)", location: "B-Building, 2nd Floor, Near Operating System Lab" },
+    { name: "Prof. G. N. Swami", position: "Assistant Professor", qualification: "B.E (CSE), M.E (CSE)", location: "C-Building, 1st Floor, AT-202 (Deep Learning Lab)" },
+    { name: "Prof. P. G. Chirmanchode", position: "Assistant Professor", qualification: "B.Tech (CSE), M.Sc (Data Science)", location: "" },
+    { name: "Prof. R. D. Joshi", position: "Assistant Professor", qualification: "B.E (CSE), M.Tech (CSE), Ph.D (Pursuing)", location: "" },
+    { name: "Prof. S. A. Langote", position: "Assistant Professor", qualification: "B.E (CSE), M.E (CSE)", location: "C-Building, 2nd Floor, AT-303 (Faculty Room)" },
+    { name: "Prof. G. N. Chandorker", position: "Assistant Professor", qualification: "B.E (IT), M.E (CSE)", location: "C-Building, 1st Floor, AT-209 (AI Lab)" },
+    { name: "Prof. T. A. Kamusagi", position: "Assistant Professor", qualification: "B.E (CSE), M.Tech (CSE)", location: "A-Building, 2nd Floor, CSE Dept, CSE-309 Lab" },
+    { name: "Prof. B. B. Dhewad", position: "Assistant Professor", qualification: "B.E (ENTC), M.Tech (ML & AI)", location: "" },
+    { name: "Prof. U. A. Sangolgi", position: "Assistant Professor", qualification: "B.E (CSE), M.E (CSE)", location: "" },
+    { name: "Prof. S. G. Sanmukh", position: "Assistant Professor", qualification: "B.E (IT), M.Tech (CSE)", location: "C-Building, 1st Floor, AT-210 (Data Science Lab)" },
+    { name: "Prof. R. U. Shinde", position: "Assistant Professor", qualification: "B.E (CSE), M.E (CSE)", location: "B-Building, 2nd Floor, CSE-305 (Software Designing Lab)" },
+    { name: "Prof. Z. M. Shaikh", position: "Assistant Professor", qualification: "B.E (CSE), M.E (Computer)", location: "" },
+    { name: "Prof. S. C. Papade", position: "Assistant Professor", qualification: "B.E (CSE), M.E (CSE), Ph.D (Pursuing)", location: "A-Building, 2nd Floor, CSE-306 (Computer Programming Lab-1)" },
+    { name: "Prof. M. B. Rangdal", position: "Assistant Professor", qualification: "B.E (CSE), M.E (CSE)", location: "" },
+    { name: "Prof. P. D. Jawalkar", position: "Assistant Professor", qualification: "B.E (CSE), M.E (Computer Engg)", location: "B-Building, 1st Floor, CSE-202 (Computer Programming Lab-2)" },
+    { name: "Prof. S. D. Dudhani", position: "Assistant Professor", qualification: "B.E (CSE), M.Tech (CSE)", location: "" },
+    { name: "Prof. A. S. Adhatrao", position: "Assistant Professor", qualification: "B.E (CSE), M.E (CSE)", location: "C-Building, 1st Floor, AT-201 (Machine Learning Lab)" },
+    { name: "Prof. S. S. Konda", position: "Assistant Professor", qualification: "B.E (IT), M.Tech (CSE)", location: "B-Building, 1st Floor, CSE-203 (Tutorial Room)" },
+    { name: "Prof. V. D. Gaikwad", position: "Assistant Professor", qualification: "B.E (CSE), M.Tech (CSE)", location: "B-Building, 1st Floor, CSE-201 (Database Lab)" }
+  ];
+
+  const kb = {
+    en:{
+      greeting:"Hello! I'm Askify, your N.K. Orchid College assistant. How can I help you today?",
+      courses:"We offer B.Tech in Computer Science & Engineering with specializations in AI & ML, Data Science, Cyber Security, and IoT.",
+      placements:"The college maintains an 85%+ placement rate. Top recruiters include TCS, Infosys, Wipro, Tech Mahindra, and Cognizant.",
+      admissions:"Admissions are based on MHT-CET for UG. Apply online via the official website; document verification and counseling follow.",
+      labs:"Key labs: AI & ML (AT-201), Deep Learning (AT-202), Data Science (AT-210), Software Designing (CSE-305), Database (CSE-201), and more.",
+      faculty:"Here are CSE faculty details:",
+      principal:"Principal: Dr. B. K. Songe (Ph.D, NITK) — BEE Certified Energy Manager & Auditor.",
+      hod:"HOD (CSE): Dr. V. V. Bag — B.Tech (CSE), M.Tech (Computer), Ph.D (Computer Engg).",
+      default:"Ask about courses, placements, admissions, faculty, or labs."
+    },
+    hi:{
+      greeting:"नमस्ते! मैं Askify हूँ, आपका N.K. Orchid College सहायक। मैं कैसे मदद कर सकता हूँ?",
+      courses:"यहाँ B.Tech (CSE) के साथ AI & ML, Data Science, Cyber Security और IoT में विशेषज्ञता वाले कार्यक्रम उपलब्ध हैं।",
+      placements:"कॉलेज का प्लेसमेंट रिकॉर्ड बेहतरीन है — 85%+ छात्र TCS, Infosys, Wipro, Tech Mahindra, Cognizant में नियुक्त होते हैं।",
+      admissions:"प्रवेश MHT-CET के आधार पर होते हैं। आधिकारिक वेबसाइट से ऑनलाइन आवेदन करें, उसके बाद दस्तावेज़ सत्यापन व काउंसलिंग होती है।",
+      labs:"मुख्य लैब्स: AI & ML (AT-201), Deep Learning (AT-202), Data Science (AT-210), Software Designing (CSE-305), Database (CSE-201) आदि।",
+      faculty:"CSE विभाग के शिक्षक:",
+      principal:"प्राचार्य: Dr. B. K. Songe (NITK) — BEE प्रमाणित ऊर्जा प्रबंधक व ऑडिटर।",
+      hod:"विभागाध्यक्ष (CSE): Dr. V. V. Bag — B.Tech (CSE), M.Tech (Computer), Ph.D (Computer Engg)।",
+      default:"कोर्स, प्लेसमेंट, एडमिशन, फैकल्टी या लैब्स के बारे में पूछें।"
+    },
+    mr:{
+      greeting:"नमस्कार! मी Askify — N.K. Orchid College सहाय्यक. मी कशी मदत करू शकतो?",
+      courses:"येथे B.Tech (CSE) सोबत AI & ML, Data Science, Cyber Security आणि IoT मधील विशेष अभ्यासक्रम उपलब्ध आहेत.",
+      placements:"कॉलेजचा प्लेसमेंट रेकॉर्ड उत्कृष्ट आहे — 85%+ विद्यार्थी TCS, Infosys, Wipro, Tech Mahindra, Cognizant मध्ये नियुक्त होतात.",
+      admissions:"प्रवेश MHT-CET गुणांवर आधारित. अधिकृत वेबसाइटवरून अर्ज करा; दस्तऐवज पडताळणी व काउन्सेलिंग पुढे होते.",
+      labs:"मुख्य प्रयोगशाळा: AI & ML (AT-201), Deep Learning (AT-202), Data Science (AT-210), Software Designing (CSE-305), Database (CSE-201) इ.",
+      faculty:"CSE विभागातील प्राध्यापकांची माहिती:",
+      principal:"प्राचार्य: Dr. B. K. Songe (NITK) — BEE मान्यताप्राप्त ऊर्जा व्यवस्थापक.",
+      hod:"विभागप्रमुख (CSE): Dr. V. V. Bag — B.Tech (CSE), M.Tech (Computer), Ph.D (Computer Engg).",
+      default:"कोर्स, प्लेसमेंट, अॅडमिशन, फॅकल्टी किंवा लॅबबद्दल विचारा."
+    },
+    kn:{
+      greeting:"ನಮಸ್ಕಾರ! ನಾನು Askify — ನಿಮ್ಮ N.K. Orchid College ಸಹಾಯಕ. ನಾನು ಹೇಗೆ ಸಹಾಯ ಮಾಡಬಹುದು?",
+      courses:"ಇಲ್ಲಿ B.Tech (CSE) ಸಹಿತ AI & ML, Data Science, Cyber Security ಮತ್ತು IoT ವಿಷಯಗಳಲ್ಲಿ ವಿಶಿಷ್ಟ ಕೋರ್ಸ್‌ಗಳು ಲಭ್ಯವಿವೆ.",
+      placements:"ಕಾಲೇಜಿನ ಪ್ಲೇಸ್ಮೆಂಟ್ ಪ್ರಮಾಣ 85% ಕ್ಕಿಂತ ಹೆಚ್ಚು. ಪ್ರಮುಖ ಕಂಪನಿಗಳು: TCS, Infosys, Wipro, Tech Mahindra, Cognizant.",
+      admissions:"ಪ್ರವೇಶ MHT-CET ಆಧಾರಿತ. ಅಧಿಕೃತ ವೆಬ್‌ಸೈಟ್ ಮೂಲಕ ಆನ್‌ಲೈನ್ ಅರ್ಜಿ ಸಲ್ಲಿಸಿ; ನಂತರ ದಾಖಲೆ ಪರಿಶೀಲನೆ ಮತ್ತು ಕೌನ್ಸೆಲಿಂಗ್.",
+      labs:"ಮುಖ್ಯ ಲ್ಯಾಬ್‌ಗಳು: AI & ML (AT-201), Deep Learning (AT-202), Data Science (AT-210), Software Designing (CSE-305), Database (CSE-201) ಇತ್ಯಾದಿ.",
+      faculty:"CSE ವಿಭಾಗದ ಅಧ್ಯಾಪಕರು:",
+      principal:"ಪ್ರಿನ್ಸಿಪಲ್: Dr. B. K. Songe (Ph.D, NITK) — BEE ಪ್ರಮಾಣಿತ ಎನರ್ಜಿ ಮ್ಯಾನೇಜರ್ ಮತ್ತು ಆಡಿಟರ್.",
+      hod:"ವಿಭಾಗ ಮುಖ್ಯಸ್ಥ (CSE): Dr. V. V. Bag — B.Tech (CSE), M.Tech (Computer), Ph.D (Computer Engg).",
+      default:"ಕೋರ್ಸ್‌ಗಳು, ಪ್ಲೇಸ್ಮೆಂಟ್‌ಗಳು, ಪ್ರವೇಶ, ಫ್ಯಾಕಲ್ಟಿ ಅಥವಾ ಲ್ಯಾಬ್‌ಗಳ ಬಗ್ಗೆ ಕೇಳಿ."
+    },
+    te:{
+      greeting:"నమస్కారం! నేను Askify — మీ N.K. Orchid College సహాయకుడు. నేను ఎలా సహాయం చేయగలను?",
+      courses:"ఇక్కడ B.Tech (CSE) తో పాటు AI & ML, Data Science, Cyber Security మరియు IoT లో ప్రత్యేక కోర్సులు అందుబాటులో ఉన్నాయి.",
+      placements:"కాలేజ్ ప్లేస్‌మెంట్ రేట్ 85% కంటే ఎక్కువ. ప్రముఖ రిక్రూటర్లు: TCS, Infosys, Wipro, Tech Mahindra, Cognizant.",
+      admissions:"ప్రవేశాలు MHT-CET ఆధారంగా జరుగుతాయి. అధికారిక వెబ్‌సైట్ ద్వారా దరఖాస్తు చేయండి; తరువాత డాక్యుమెంట్ వెరిఫికేషన్ మరియు కౌన్సెలింగ్.",
+      labs:"ప్రధాన ల్యాబ్స్: AI & ML (AT-201), Deep Learning (AT-202), Data Science (AT-210), Software Designing (CSE-305), Database (CSE-201) మొదలైనవి.",
+      faculty:"CSE విభాగం అధ్యాపకులు:",
+      principal:"ప్రిన్సిపాల్: Dr. B. K. Songe (Ph.D, NITK) — BEE సర్టిఫైడ్ ఎనర్జీ మేనేజర్ మరియు ఆడిటర్.",
+      hod:"విభాగాధిపతి (CSE): Dr. V. V. Bag — B.Tech (CSE), M.Tech (Computer), Ph.D (Computer Engg).",
+      default:"కోర్సులు, ప్లేస్‌మెంట్లు, అడ్మిషన్, ఫ్యాకల్టీ లేదా ల్యాబ్‌ల గురించి అడగండి."
+    }
+  };
+
+  /* ===================== DOM HOOKS ===================== */
+  const messagesEl = document.getElementById('messages');
+  const welcomeEl  = document.getElementById('welcome');
+  const inputEl    = document.getElementById('messageInput');
+  const sendBtn    = document.getElementById('sendBtn');
+  const clearBtn   = document.getElementById('clearBtn');
+  const voiceBtn   = document.getElementById('voiceBtn');
+  const langSel    = document.getElementById('languageSelect');
+  const themeBtn   = document.getElementById('themeBtn');
+
+  let lang = 'en';
+
+  /* ===================== TRANSLATION (HOSTED MODE) ===================== */
+  const LT_URL = localStorage.getItem('askify-lt-url') || 'https://libretranslate.de/translate';
+  async function translateText(text, targetLang){
+    const map = {en:'en',hi:'hi',mr:'mr',kn:'kn',te:'te'};
+    const to = map[targetLang] || 'en';
+    if(to==='en') return text;
+    try{
+      const res = await fetch(LT_URL,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({q:text, source:'en', target:to, format:'text'})
+      });
+      const data = await res.json();
+      return data.translatedText || text;
+    }catch(err){
+      console.warn('Translation failed, falling back to English:', err);
+      return text;
+    }
+  }
+
+  /* ===================== SPEECH (TTS) ===================== */
+  function speak(text){
+    if(!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const voices = window.speechSynthesis.getVoices();
+    const map = {en:'en-IN',hi:'hi-IN',mr:'mr-IN',kn:'kn-IN',te:'te-IN'};
+    const u = new SpeechSynthesisUtterance(String(text).replace(/<[^>]+>/g,''));
+    u.lang = map[lang] || 'en-IN';
+    u.voice = voices.find(v=>v.lang===u.lang) || voices[0];
+    u.rate = 1.02; u.pitch = 1.0; u.volume = 1;
+    window.speechSynthesis.speak(u);
+  }
+
+  /* ===================== HELPERS ===================== */
+  let typingEl;
+  function showTyping(){
+    if(!typingEl){
+      typingEl = document.createElement('div');
+      typingEl.className = 'msg bot';
+      typingEl.innerHTML = `<div class="avatar bot">🤖</div><div class="bubble">Typing…</div>`;
+    }
+    messagesEl.appendChild(typingEl);
+    messagesEl.parentElement.scrollTop = messagesEl.parentElement.scrollHeight;
+  }
+  function hideTyping(){ if(typingEl && typingEl.parentNode){ typingEl.parentNode.removeChild(typingEl);} }
+
+  function addMessage(html, who='bot'){
+    welcomeEl.style.display='none';
+    const wrap = document.createElement('div');
+    wrap.className = `msg ${who}`;
+    wrap.innerHTML = `
+      <div class="avatar ${who}">${who==='bot'?'🤖':'🧑‍🎓'}</div>
+      <div class="bubble">${html}</div>
+    `;
+    messagesEl.appendChild(wrap);
+    messagesEl.parentElement.scrollTop = messagesEl.parentElement.scrollHeight;
+    if(who==='bot'){ speak(html); }
+  }
+
+  function facultyHTML(list=facultyData){
+    return list.map(f=>`
+      <div class="faculty-card">
+        <div class="faculty-name">${f.name}</div>
+        <div class="faculty-detail">${f.position}</div>
+        <div class="faculty-detail">${f.qualification}</div>
+        ${f.location?`<div class="faculty-detail">${f.location}</div>`:""}
+      </div>
+    `).join('');
+  }
+
+  // Core reply logic now uses ENGLISH base, then we translate for UI/voice
+  function respond(q){
+    const t = kb.en; // always use English as source for translation
+    const s = q.toLowerCase();
+    if(s.includes('course')) return t.courses;
+    if(s.includes('placement')) return t.placements;
+    if(s.includes('admission')) return t.admissions;
+    if(s.includes('lab')) return t.labs;
+    if(s.includes('principal')) return t.principal;
+    if(s.includes('hod')) return t.hod;
+    if(s.includes('faculty') || s.includes('teacher') || s.includes('prof')){
+      return `${t.faculty}<br>${facultyHTML()}`;
+    }
+    const match = facultyData.find(f => f.name.toLowerCase().includes(s));
+    if(match){ return facultyHTML([match]); }
+    return t.default;
+  }
+
+  /* ===================== EVENTS ===================== */
+  async function send(){
+    const text = inputEl.value.trim();
+    if(!text) return;
+    addMessage(text,'user');
+    inputEl.value='';
+
+    showTyping();
+    // Build English reply, then translate if needed
+    const englishReply = respond(text);
+    let translated = englishReply;
+
+    // If reply contains faculty cards, only translate the heading before <br>
+    if(englishReply.includes('<br>') && englishReply.includes('faculty-card')){
+      const [head, rest] = englishReply.split('<br>');
+      const headT = await translateText(head, lang);
+      translated = `${headT}<br>${rest}`;
+    }else{
+      translated = await translateText(englishReply, lang);
+    }
+
+    hideTyping();
+    addMessage(translated,'bot');
+  }
+
+  sendBtn.addEventListener('click', send);
+  inputEl.addEventListener('keydown', e=>{
+    if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); send(); }
+  });
+
+  document.querySelectorAll('.qbtn').forEach(b=>{
+    b.addEventListener('click', ()=>{ inputEl.value=b.dataset.question; send(); });
+  });
+
+  clearBtn.addEventListener('click', ()=>{
+    messagesEl.innerHTML=''; welcomeEl.style.display='flex';
+  });
+
+  langSel.addEventListener('change', async e=>{
+    lang = e.target.value;
+    showTyping();
+    const greetTranslated = await translateText(kb.en.greeting, lang);
+    hideTyping();
+    addMessage(greetTranslated,'bot');
+    if(rec){
+      const map={en:'en-IN',hi:'hi-IN',mr:'mr-IN',kn:'kn-IN',te:'te-IN'};
+      rec.lang = map[lang] || 'en-IN';
+    }
+  });
+
+  // theme toggle with localStorage
+  function setTheme(mode){
+    document.documentElement.classList.toggle('dark', mode==='dark');
+    localStorage.setItem('askify-theme', mode);
+    themeBtn.textContent = mode==='dark' ? '☀️' : '🌙';
+  }
+  const savedTheme = localStorage.getItem('askify-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  setTheme(savedTheme);
+  themeBtn.addEventListener('click', ()=> setTheme(document.documentElement.classList.contains('dark')?'light':'dark'));
+
+  // voice input (Chrome)
+  let rec;
+  if('webkitSpeechRecognition' in window){
+    rec = new webkitSpeechRecognition();
+    rec.lang = 'en-IN'; rec.interimResults=false; rec.maxAlternatives=1;
+    rec.onresult = e => { inputEl.value = e.results[0][0].transcript; send(); };
+    rec.onend = ()=> voiceBtn.classList.remove('recording');
+    voiceBtn.addEventListener('click', ()=>{
+      voiceBtn.classList.add('recording'); rec.start();
+    });
+  } else {
+    voiceBtn.disabled = true; voiceBtn.title = "Voice not supported";
+  }
+
+  // initial greeting (translated if needed on first load)
+  addMessage(kb.en.greeting,'bot');
+</script>
+</body>
+</html>
